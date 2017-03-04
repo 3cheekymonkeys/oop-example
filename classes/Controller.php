@@ -1,0 +1,29 @@
+<?php
+
+abstract class Controller {
+    protected $request;
+    protected $action;
+
+    public function __construct($action, $request) {
+        $this->action = $action;
+        $this->request = $request;   
+    }
+
+    public function executeAction() {
+        return $this->{$this->action}();
+    }
+
+    protected function returnView($data,$page,$id) {
+        if ($id) {
+            require('views/'.THEME.'/common/header.php');
+            $view = 'views/'.THEME.'/'.get_class($this).'/'.$this->action.'.php';
+            require($view);
+            require('views/'.THEME.'/common/footer.php');
+        } else {
+            require('views/'.THEME.'/common/header.php');
+            $view = 'views/'.THEME.'/'.get_class($this).'/'.$page.'.php';
+            require($view);
+            require('views/'.THEME.'/common/footer.php');
+        }
+    }
+}
