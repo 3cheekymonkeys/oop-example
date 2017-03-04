@@ -1,2 +1,2 @@
 # oop-example
-My first attempt at OOP
+My first attempt at OOP with template control
